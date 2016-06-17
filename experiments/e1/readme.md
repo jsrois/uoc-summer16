@@ -12,6 +12,7 @@ Classifying between positive and negative images, using the evoked *valence* in 
 - [ ] Represent the response of the hidden layers to the test images with the Places net before and after the finetuning, to compare responses.
 - [ ] Repeat the fine tuning with a single output of the net. Instead of using a Softmax-based Loss function, try a Sigmoid-based loss-layer.
 - [ ] Draw a representation of the learning curve (accuracy v. number of iterations).
+- [ ] Train regression model using original valence annotations.
  
 ### e1. Fine-tuning the AlexNet model to classify images as _emotionally_ positive/negative:
 
@@ -82,5 +83,8 @@ _Finetuning magic: After running this command, Caffe will detect the corresponde
     I0617 11:11:07.893702 30653 net.cpp:752] Ignoring source layer fc8
 
     
+##### Results
 
-  
+_We can use the script in `$CAFFE_ROOT/tools/extra/plot_training_log.py.example` to plot out learning curves in a png files._
+
+

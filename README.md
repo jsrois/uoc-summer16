@@ -5,12 +5,13 @@ carried out using state-of-the-art tools such as Caffe (BVLC), TensorFlow (Googl
 
 Go to the [experiments](doc/experiments.md) section to see the different tests and whacky experiments carried out with neural nets or visit the [documentation and resources](doc/resources.md) section for a list of interesting publications and tools (including some remarks and comments). 
 
-## General setup
+### General setup
 
 Remember to download the required image databases and models by running `setup.sh` before you run any of the experiments.
 
-All the experiments require the `CAFFE_ROOT` environment variable to be set to the location of your `caffe` instalation. For instance, you can place the following line in your `~/.bash_profile` file:
+All the experiments require the `CAFFE_ROOT` environment variable to be set to the location of your `caffe` instalation. Also, adding `$CAFFE_ROOT/build/tools` to your `PATH` can be handy. For instance, you can place the following line in your `~/.bash_profile` file:
  
- ```
+```
  export CAFFE_ROOT=$HOME/caffe
- ```
+ export PATH=$CAFFE_ROOT/build/tools:$PATH
+```
