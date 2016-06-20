@@ -2,6 +2,10 @@
 # exit on failure
 set -e
 
+DB_PATH=databases
+EMOTION6_PATH=$DB_PATH/Emotion6
+
+
 run_command(){
  echo -e "\e[33mCommand: $@\e[0m"
  $@
@@ -26,17 +30,16 @@ uncompress_file() {
 }
 
 get_database_Emotion6() {
- url="http://chenlab.ece.cornell.edu/people/kuanchuan/publications/Emotion6.zip"
- filename=$(basename $url)
- run_command download_file_if_not_present $url $filename
- run_command uncompress_file $filename
- rm $filename
+ if [ ! -d $EMOTION6_PATH ]; then
+  url="http://chenlab.ece.cornell.edu/people/kuanchuan/publications/Emotion6.zip"
+  filename=$(basename $url)
+  run_command download_file_if_not_present $url $filename
+  run_command uncompress_file $filename
+  rm $filename
+ else
+  info Emotion6 database is already downloaded
+ fi
 }
 
-if [ ! -d Emotion6 ]
-then
- run_command get_database_Emotion6
-else
- info Emotion6 database is already downloaded
-fi
-./generate_Emotion6_lists.sh
+run_command get_database_Emotion6
+
