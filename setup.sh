@@ -26,7 +26,7 @@ download_file_if_not_present() {
 }
 
 uncompress_file() {
- unzip $1
+ unzip $1 -d $2
 }
 
 get_database_Emotion6() {
@@ -34,12 +34,17 @@ get_database_Emotion6() {
   url="http://chenlab.ece.cornell.edu/people/kuanchuan/publications/Emotion6.zip"
   filename=$(basename $url)
   run_command download_file_if_not_present $url $filename
-  run_command uncompress_file $filename
+  run_command uncompress_file $filename $(dirname $EMOTION6_PATH)
   rm $filename
  else
   info Emotion6 database is already downloaded
  fi
 }
 
+generate_Emotion6_labels() {
+ python databases/scripts/generate_Emotion6_sets.py $PWD/databases/Emotion6
+}
+
 run_command get_database_Emotion6
+run_command generate_Emotion6_labels
 

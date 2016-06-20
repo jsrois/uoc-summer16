@@ -22,12 +22,26 @@ def parse_ground_truth_data(input_file):
             samples.append(parse_line(line))
     return samples
 
+def generate_samples_valence(samples,root_path=''):
+    print "Generating samples for regression using valence scores"
+    score_samples=[]
+    for sample in samples:
+        file_path = root_path + "/" + sample['file_path']
+        score_samples.append((file_path, sample['valence']))
+    random.shuffle(score_samples)
+    samples_in_train_set = int(0.8*len(score_samples))
+    train_set = score_samples[:samples_in_train_set]
+    test_set  = score_samples[samples_in_train_set:]
+    write_samples(train_set, "databases/Emotion6/em6_valence_train.txt")
+    write_samples(test_set, "databases/Emotion6/em6_valence_test.txt")
+
 def generate_samples_thresholded_valence(samples,root_path=''):
+    print "Generating Positive/Negative samples for classification using thresholded valence scores"
     positive_samples=[]
     negative_samples=[]
     for sample in samples:
         file_path=root_path+"/"+sample['file_path']
-        if int(sample['valence'])<5:
+        if float(sample['valence'])<5:
             negative_samples.append((file_path,0))
         else:
             positive_samples.append((file_path,1))
@@ -46,15 +60,15 @@ def generate_samples_thresholded_valence(samples,root_path=''):
     random.shuffle(train_set)
     random.shuffle(test_set)
 
-    write_samples(train_set, output_files["train"])
-    write_samples(test_set, output_files["test"])
+    write_samples(train_set, "databases/Emotion6/em6_posneg_train.txt")
+    write_samples(test_set, "databases/Emotion6/em6_posneg_test.txt")
 
 
 
 emotion6_root=argv[1]
 input_file=emotion6_root+"/ground_truth.txt"
-output_files = { "train" : "em6_posneg_train.txt", "test" : "em6_posneg_test.txt"}
 
 samples = parse_ground_truth_data(input_file)
+generate_samples_valence(samples, emotion6_root+'/images')
 generate_samples_thresholded_valence(samples, emotion6_root+'/images')
 
