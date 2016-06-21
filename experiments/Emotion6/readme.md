@@ -123,5 +123,30 @@ layer {
 
 ##### Results
 
+### e3. Fine-tuning the placesCNN model to classify images as _emotionally_ positive/negative (higher lr in new layer):
 
+This test repeats the **e2** experiment with a higher learning rate in the new layer (`fc8_emotion6`) and compares the achieved results with the results obtained in the previous case. To do so, we repeat fine tuning with a 10x increase of the -relative- learning rate weights of this last layer: 
 
+```
+layer {
+  name: "fc8_emotion6"
+  type: "InnerProduct"
+  bottom: "fc7"
+  top: "fc8_emotion6"
+  param {
+    lr_mult: 10 << higher weights than pretrained layers'
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 20 << higher weights than pretrained layers'
+    decay_mult: 0
+  }
+  inner_product_param {
+    num_output: 2
+    ...
+  }
+}
+
+```
+
+##### Results
