@@ -85,6 +85,8 @@ _Finetuning magic: After running this command, Caffe will detect the corresponde
     
 ##### Results
 
-_We can use the script in `$CAFFE_ROOT/tools/extra/plot_training_log.py.example` to plot out learning curves in a png files._
+_We can use the script in `$CAFFE_ROOT/tools/extra/plot_training_log.py.example` to plot out learning curves into a png file._
+
+![result](e1.png)
 
 
