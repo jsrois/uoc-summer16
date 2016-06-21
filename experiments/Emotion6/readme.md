@@ -82,13 +82,6 @@ _Finetuning magic: After running this command, Caffe will detect the corresponde
     ... 
     I0617 11:11:07.893702 30653 net.cpp:752] Ignoring source layer fc8
 
-    
-##### Results
-
-_We can use the script in `$CAFFE_ROOT/tools/extra/plot_training_log.py.example` to plot out learning curves into a png file._
-
-![result](e1.png)
-
 
 ### e2. Fine-tuning the placesCNN model to classify images as _emotionally_ positive/negative (same lr weights in all layers):
 
@@ -121,8 +114,6 @@ layer {
 ```
 
 
-##### Results
-
 ### e3. Fine-tuning the placesCNN model to classify images as _emotionally_ positive/negative (higher lr in new layer):
 
 This test repeats the **e2** experiment with a higher learning rate in the new layer (`fc8_emotion6`) and compares the achieved results with the results obtained in the previous case. To do so, we repeat fine tuning with a 10x increase of the -relative- learning rate weights of this last layer: 
@@ -149,4 +140,7 @@ layer {
 
 ```
 
-##### Results
+
+### Classification results (e1, e2, e3)
+
+![Accuracy](e1_e2.png)
