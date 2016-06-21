@@ -6,6 +6,6 @@ else
  echo "CAFFE_ROOT is set to '$CAFFE_ROOT'"
  target_dir=$(dirname $0)
  pushd $target_dir
- caffe train -solver e3.solver.txt -weights $CAFFE_ROOT/extra_models/placesCNN_upgraded/places205CNN_iter_300000_upgraded.caffemodel -gpu all &> e2.log
+ caffe train -solver e3.solver.txt -weights $CAFFE_ROOT/extra_models/placesCNN_upgraded/places205CNN_iter_300000_upgraded.caffemodel -gpu all &> e3.log
  popd
 fi
