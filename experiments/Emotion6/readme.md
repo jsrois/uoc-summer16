@@ -6,7 +6,7 @@ Classifying between positive and negative images, using the evoked *valence* in 
 
 - [x] Generate positive(+1)/negative(0) labels for the Emotion6 database using the valence score provided (see [setup]())
 - [x] _Fine-tune_ the AlexNet model using the Emotion6 positive/negative labels.
-- [ ] _Fine-tune_ the Places CNN model using the Emotion6 positive/negative labels.
+- [x] _Fine-tune_ the Places CNN model using the Emotion6 positive/negative labels.
 - [ ] Compose a mosaic image given the classification results with the different models (e.g. green border for images classified as positive, red for negative).
 - [ ] Change the learning rate and decay of the _new_ layer in the places net, so that the weights of this layer during finetuning change faster than the pretrained layers.
 - [ ] Represent the response of the hidden layers to the test images with the Places net before and after the finetuning, to compare responses.
@@ -88,5 +88,40 @@ _Finetuning magic: After running this command, Caffe will detect the corresponde
 _We can use the script in `$CAFFE_ROOT/tools/extra/plot_training_log.py.example` to plot out learning curves into a png file._
 
 ![result](e1.png)
+
+
+### e2. Fine-tuning the placesCNN model to classify images as _emotionally_ positive/negative (same lr weights in all layers):
+
+Similarly to the previous experiment, this one tries to _update_ a pretrained model to cope with the same 2-class classification problem. The structure of the solver and the required files is very similar, with the following considerations: 
+
+- The places CNN model has been downloaded from [here](http://places.csail.mit.edu/model/placesCNN_upgraded.tar.gz) and the files have been saved in `$CAFFE_ROOT/extra_models/placesCNN_upgraded`.
+- The net file (`e2.train_val.prototxt`) has been modified as in the previous example to use the Emotion6 images as input. Additionally, the prototxt has been updated to follow the current Caffe data format, by using the `$CAFFE_ROOT/build/tools/upgrade_net_proto_text` binary.
+- **learning rate**: to analyze the effect of using different fine tuning strategies, the learning rate of the _new_ layer has been kept unaltered: 
+
+```
+layer {
+  name: "fc8_emotion6"
+  type: "InnerProduct"
+  bottom: "fc7"
+  top: "fc8_emotion6"
+  param {
+    lr_mult: 1 << same weights as other layers'
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2 << same weights as other layers'
+    decay_mult: 0
+  }
+  inner_product_param {
+    num_output: 2
+    ...
+  }
+}
+
+```
+
+
+##### Results
+
 
 
