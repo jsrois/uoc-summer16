@@ -8,8 +8,8 @@ Classifying between positive and negative images, using the evoked *valence* in 
 - [x] _Fine-tune_ the AlexNet model using the Emotion6 positive/negative labels.
 - [x] _Fine-tune_ the Places CNN model using the Emotion6 positive/negative labels.
 - [ ] Compose a mosaic image given the classification results with the different models (e.g. green border for images classified as positive, red for negative).
-- [ ] Change the learning rate and decay of the _new_ layer in the places net, so that the weights of this layer during finetuning change faster than the pretrained layers.
-- [ ] Represent the response of the hidden layers to the test images with the Places net before and after the finetuning, to compare responses.
+- [x] Change the learning rate and decay of the _new_ layer in the places net, so that the weights of this layer during finetuning change faster than the pretrained layers.
+- [ ] Visualize the response of the hidden layers to the test images with the Places net before and after the finetuning, to compare responses.
 - [ ] Repeat the fine tuning with a single output of the net. Instead of using a Softmax-based Loss function, try a Sigmoid-based loss-layer.
 - [ ] Draw a representation of the learning curve (accuracy v. number of iterations).
 - [ ] Train regression model using original valence annotations.
