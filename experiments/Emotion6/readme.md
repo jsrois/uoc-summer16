@@ -143,4 +143,4 @@ layer {
 
 ### Classification results (e1, e2, e3)
 
-![Accuracy](e1_e2.png)
+![Accuracy](e1_e2_e3.png)
