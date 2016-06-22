@@ -140,7 +140,19 @@ layer {
 
 ```
 
+### e4. Fine-tuning of the placesCNN model for classification with 1-output net
+
+_The `lr_mult` values in the `fc8_emotion` layer will be the same as in `e2`_
+ 
+Changing the output layer to provide one single output value implies that we have to use a different `loss` layer in training (a Sigmoid-based loss function). We should obtain the same accuracy as in e2.
+ 
+_Softmax regression is actually a generalization of logistic regression. More info on the relationship between Softmax Regression and Logistic Regression [here](http://ufldl.stanford.edu/tutorial/supervised/SoftmaxRegression/)_
+
+
 
 ### Classification results (e1, e2, e3)
 
 ![Accuracy](e1_e2_e3.png)
+
+
+### e5. Finetuning the placesCNN model for regression using the original Emotion6 valence scores
